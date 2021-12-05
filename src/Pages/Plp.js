@@ -1,31 +1,28 @@
 import React from 'react'
 import styled from 'styled-components'
-import Filters from '../components/Filters'
+import Banner from '../components/Banner'
 import Gallery from '../components/Gallery'
 
 const MainPlpStyles = styled.div`
-    width: 90%;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    .plp-filters {
-        flex: 2;
+    width: 100%;
+    .plp-banner {
+        width: 100%;
     }
     .plp-gallery {
-        flex: 6;
+        width: 90%;
+        margin: auto;
     }
 `
 
 const Plp = () => {
     return (
         <MainPlpStyles>
-        <div className='plp-filters'>
-            <Filters />
-        </div>
-        <div className='plp-gallery'>
-            <Gallery />
-        </div>
+            <div className='plp-banner'>
+                <Banner />
+            </div>
+            <div className='plp-gallery'>
+                <Gallery />
+            </div>
         </MainPlpStyles>
     )
 }
