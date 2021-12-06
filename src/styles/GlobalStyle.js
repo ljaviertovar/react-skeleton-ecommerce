@@ -10,6 +10,7 @@ const GlobalStyles = createGlobalStyle`
     --gray-1: #F5F5F5;
     --blue-1: #2F89FC;
     --black-1: #40514E;
+    --red-1: #FA163F;
   }
   html{
     font-size: 16px;
