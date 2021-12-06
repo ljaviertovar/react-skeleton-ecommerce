@@ -16,6 +16,7 @@ const MainPlpStyles = styled.div`
 `
 
 const Plp = () => {
+
     return (
         <MainPlpStyles>
             <div className='plp-banner'>

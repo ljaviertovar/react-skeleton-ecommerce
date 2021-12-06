@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
 
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 import { FaStar } from 'react-icons/fa'
 
 const GalleryStyles = styled.div`
@@ -25,7 +28,7 @@ const GalleryStyles = styled.div`
         border: 3px solid var(--gray-1);
         padding: 1rem;
     }
-    .item__btn {
+    .item__btns {
         display: flex;
         justify-content: space-between;
         button {
@@ -62,6 +65,7 @@ const GalleryStyles = styled.div`
         justify-content: space-between;
         align-items: center;
         font-size: 1rem;
+        width: 60px;
     }
     .item__btnadd {
         border: 2px solid var(--red-1);
@@ -78,27 +82,76 @@ const GalleryStyles = styled.div`
         background-color: var(--red-1)!important;
         color: var(--gray-1);
     }
+    .item-start{
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        border: 1px solid yellow;
+        svg {
+        font-size: 1rem;
+        }
+    }
+    .skeleton {
+        margin-bottom: 1rem;
+    }
 `
 
 const Gallery = () => {
 
     const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true)
+
+    const rowSkeletons = 6
 
     useEffect(() => {
 
         axios.get('https://fakestoreapi.com/products/category/electronics/')
             .then(({ data }) => {
                 setProducts(data)
+                setLoading(false)
             })
 
     }, [])
 
+    if (loading) {
+
+        let rows = []
+        for (let index = 0; index < 6; index++) {
+            rows.push(
+                <section>
+                    <article className='item'>
+                        <div className='item-img'>
+                            <Skeleton width={140} height={140} />
+                        </div>
+                        <h3 className='item-title'><Skeleton count={4} /></h3>
+                        <div className='item-info'>
+                            <Skeleton width={160} height={20} />
+                            <Skeleton width={30} height={20} />
+                            <Skeleton width={22} height={22} circle={true} />
+                        </div>
+                        <Skeleton height={42} count={2} className='skeleton' />
+                    </article>
+                </section>
+            )
+        }
+
+        return (
+            <SkeletonTheme color='#F5F5F5' highlightColor='#ffffff'>
+                <GalleryStyles className='gallery__grid'>
+                    <h2 className='gallery__title'><Skeleton /></h2>
+                    <div className='gallery__grid'>
+                        {rows}
+                    </div>
+                </GalleryStyles>
+            </SkeletonTheme>
+        )
+
+    }
 
     return (
         <GalleryStyles>
             <h2 className='gallery__title'>Featured Products</h2>
             <div className='gallery__grid'>
-
                 {products &&
                     products.map(product => {
                         return (
@@ -115,11 +168,11 @@ const Gallery = () => {
                                         <span>{product.category}</span>
                                         <div className='item-rating'>
                                             <span>{product.rating.rate}</span>
-                                            <span><FaStar fill='yellow'/></span>
+                                            <span className='item-start'><FaStar fill='yellow' /></span>
                                         </div>
                                     </div>
                                     <h3 className='item-price'>${product.price}</h3>
-                                    <div className='item__btn'>
+                                    <div className='item__btns'>
                                         <button className='item__btnadd'>Add to card</button>
                                         <button className='item__btnbuy'>Buy now</button>
                                     </div>
