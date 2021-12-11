@@ -116,7 +116,7 @@ const Gallery = () => {
     if (loading) {
 
         let rows = []
-        for (let index = 0; index < 6; index++) {
+        for (let index = 0; index < rowSkeletons; index++) {
             rows.push(
                 <section>
                     <article className='item'>
@@ -129,7 +129,7 @@ const Gallery = () => {
                             <Skeleton width={30} height={20} />
                             <Skeleton width={22} height={22} circle={true} />
                         </div>
-                        <Skeleton height={42} count={2} className='skeleton' />
+                        <Skeleton height={48} count={2} className='skeleton' />
                     </article>
                 </section>
             )

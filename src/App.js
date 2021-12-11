@@ -1,7 +1,7 @@
 import React from "react";
 
 import Header from "./components/Header";
-import Plp from "./Pages/Plp";
+import Plp from "./pages/Plp";
 
 function App() {
 	return (
